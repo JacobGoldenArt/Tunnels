@@ -1,0 +1,8 @@
+.zed/*
+.venv/*
+_reference/*
+.env
+.env*
+.gitignore
+readme
+notes/*
