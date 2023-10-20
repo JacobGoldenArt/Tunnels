@@ -6,3 +6,6 @@ _reference/*
 .gitignore
 readme
 notes/*
+data/*
+__pycache__/*
+.python-version

@@ -49,3 +49,19 @@ class TunnelOps(Tunnel):
             logger.error(f"No tunnel found with id {tunnel_id}")
         else:
             logger.success(f"Tunnel {tunnel_id} was deleted")
+
+    @classmethod
+    async def process(cls, tunnel_id, data):
+        # Retrieve the tunnel from the database
+        tunnel = tunnels_c.find_one({"_id": ObjectId(tunnel_id)})
+        if tunnel is not None:
+            # Remove the _id key
+            tunnel.pop('_id', None)
+            # Convert the dictionary to a Tunnel object
+            tunnel_obj = Tunnel(**tunnel)
+            # Process the data
+            await tunnel_obj.process(data)
+            # Update the tunnel in the database
+            tunnels_c.update_one({"_id": ObjectId(tunnel_id)}, {"$set": tunnel_obj.__dict__})
+        else:
+            logger.error(f"No tunnel found with id {tunnel_id}")

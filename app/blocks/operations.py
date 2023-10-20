@@ -1,6 +1,7 @@
 import os
+from typing import Dict, Any
 from .base import Block
-from .text import TextGenerator, Translator, Summarizer
+from .text import TextGenerator, Summarizer, Translator
 from loguru import logger
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
@@ -32,10 +33,10 @@ class BlocksOps(Block):
 
 
     @classmethod
-    def newBlock(cls, name, type: str = "textgen", tunnel_id: str = None):
+    def newBlock(cls, tunnel_id: str, params: Dict[str, Any]):
         """Create a new block store it in the db and return its ID"""
-        block_class = block_types[type]
-        block_new = globals()[block_class](name)
+        block_class = block_types[params.get('type', 'textgen')]
+        block_new = globals()[block_class](**params)
         result = blocks_c.insert_one(block_new.__dict__)
         logger.success(f"{block_new} created")
 

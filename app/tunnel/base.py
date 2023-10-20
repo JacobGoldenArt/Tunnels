@@ -12,8 +12,11 @@ class Tunnel:
     def add_block(self, block: Block) -> None:
         self.blocks[block.name] = block
 
-    async def process(self, data: Dict[str, Any]) -> None:
-        self.tunnel_input = data
-        for block in self.blocks.values():
-            await block.process()
-        return self.tunnel_output
+    async def process(self, data):
+        processed_data = data
+        for block_dict in self.blocks.values():
+            # Convert the dictionary to a Block object
+            block_obj = Block(**block_dict)
+            # Process the data
+            processed_data = await block_obj.process(processed_data)
+        self.tunnel_output = processed_data

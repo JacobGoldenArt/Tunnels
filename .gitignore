@@ -4,4 +4,4 @@
 .venv
 .zed
 pyrightconfig.json
-_re
+_reference/*
