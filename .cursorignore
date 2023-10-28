@@ -1,11 +1,2 @@
-.zed/*
-.venv/*
-_reference/*
+data
 .env
-.env*
-.gitignore
-readme
-notes/*
-data/*
-__pycache__/*
-.python-version

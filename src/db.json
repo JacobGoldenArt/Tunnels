@@ -1,0 +1,15 @@
+{
+  "tunnels": {
+    "1": {
+      "name": "Tunnel_bi",
+      "blocks": {},
+      "routing": { "routes": {} },
+      "tunnel_output": {}
+    }
+  },
+  "blocks": {
+    "1": { "name": "testBlock1", "type": "TestBlock", "data": {} },
+    "2": { "name": "testBlock2", "type": "TestBlock", "data": {} },
+    "3": { "name": "testBlock3", "type": "TestBlock", "data": {} }
+  }
+}
