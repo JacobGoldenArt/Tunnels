@@ -1,15 +1,1 @@
-{
-  "tunnels": {
-    "1": {
-      "name": "Tunnel_bi",
-      "blocks": {},
-      "routing": { "routes": {} },
-      "tunnel_output": {}
-    }
-  },
-  "blocks": {
-    "1": { "name": "testBlock1", "type": "TestBlock", "data": {} },
-    "2": { "name": "testBlock2", "type": "TestBlock", "data": {} },
-    "3": { "name": "testBlock3", "type": "TestBlock", "data": {} }
-  }
-}
+{"tunnels": {"1": {"name": "WTF", "blocks": {}, "routing": {"routes": {}}, "tunnel_output": {}}}, "blocks": {"1": {"name": "aBlock1", "type": "TestBlock", "data": {}}, "2": {"name": "bBlock2", "type": "TestBlock", "data": {}}, "3": {"name": "cBlock3", "type": "TestBlock", "data": {}}}}

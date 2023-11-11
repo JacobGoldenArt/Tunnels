@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional, Union
 from db.dao import BlockDAO
-from tunnel.operations import TunnelOps
-from blocks.base import Block
+from ops.tunnel_ops import TunnelOps
+from blocks.block_base import Block
 from loguru import logger
 
 

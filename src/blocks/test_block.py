@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Optional, Dict, Any
 from loguru import logger
-from .base import Block
+from blocks.block_base import Block
 
 
 @dataclass

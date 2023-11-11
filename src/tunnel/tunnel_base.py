@@ -1,9 +1,10 @@
-from dataclasses import dataclass, field
+from dataclasses import field
+import asyncio
 from pydantic import BaseModel
 from typing import Dict, Any
-from blocks.base import Block
-from tunnel.routing import Routing
-import asyncio
+from blocks.block_base import Block
+from routes.routes import Routing
+from loguru import logger
 
 
 class Tunnel(BaseModel):
@@ -21,6 +22,7 @@ class Tunnel(BaseModel):
         Add a block to the tunnel.
         """
         self.blocks[block.name] = block
+        return block
 
     def connect_blocks(self, source_block_name: str, target_block_name: str) -> None:
         """
@@ -31,7 +33,7 @@ class Tunnel(BaseModel):
         else:
             self.routing.remove_route(source_block_name, "tunnel_output")
             self.routing.add_route(source_block_name, target_block_name)
-    
+
     def model_dump(self) -> Dict[str, Any]:
         return {
             "name": self.name,

@@ -1,7 +1,7 @@
 from tinydb import TinyDB, Query
 from typing import Optional
-from tunnel.base import Tunnel
-from blocks.base import Block
+from tunnel.tunnel_base import Tunnel
+from blocks.block_base import Block
 from loguru import logger
 
 
@@ -28,9 +28,12 @@ class TunnelDAO:
         logger.info(f"Deleted tunnel with id {tunnel_id}")
 
     def update(self, tunnel_id: int, tunnel: Tunnel) -> None:
-            TunnelQuery = Query()
-            self.db.update(tunnel.model_dump(), TunnelQuery.doc_id == tunnel_id)
-            logger.info(f"Updated tunnel with id {tunnel_id}")
+        print(
+            f"!Updating tunnel {tunnel_id} with data: {tunnel}"
+        )  # Or use a debugger to inspect `tunnel`
+        TunnelQuery = Query()
+        self.db.upsert(tunnel, TunnelQuery.doc_id == tunnel_id)
+        logger.info(f"!Updated tunnel with id {tunnel_id}")
 
 
 class BlockDAO:

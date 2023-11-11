@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
 from typing import Dict, Any, Optional
-from .base import Tunnel, Block
+from tunnel.tunnel_base import Tunnel
+from blocks.block_base import Block
 from blocks.test_block import TestBlock
-from tunnel.routing import Routing
+from routes.routes import Routing
 from db.dao import TunnelDAO, BlockDAO
 from loguru import logger
 
@@ -46,7 +47,7 @@ class TunnelOps:
         if not tunnel_data:
             logger.error(f"No tunnel found with id {tunnel_id}")
             return None
-                # Create a Tunnel object
+            # Create a Tunnel object
         tunnel_obj = Tunnel(name=tunnel_data.name)
 
         # Create Block objects for each block in the tunnel
@@ -55,7 +56,7 @@ class TunnelOps:
             tunnel_obj.add_block(block_obj)
 
         return tunnel_obj
-        
+
     def addBlockToTunnel(self, tunnel_id: int, block_id: int) -> None:
         """
         Add a block to a tunnel.
@@ -68,7 +69,6 @@ class TunnelOps:
             logger.success(f"Block {block_id} added to Tunnel {tunnel_id}")
         else:
             logger.error(f"Could not find Tunnel {tunnel_id} or Block {block_id}")
-
 
     def deleteTunnel(self, tunnel_id: int) -> None:
         """
@@ -98,7 +98,9 @@ class TunnelOps:
             logger.error(f"No tunnel found with id {tunnel_id}")
             return
 
-        tunnel_obj = Tunnel(name=tunnel_data.name, routing=tunnel_data.routing)  # Include routing when creating the Tunnel object
+        tunnel_obj = Tunnel(
+            name=tunnel_data.name, routing=tunnel_data.routing
+        )  # Include routing when creating the Tunnel object
         for block_data in tunnel_data.blocks.values():
             block_obj = self.block_factory(block_data)
             tunnel_obj.add_block(block_obj)
